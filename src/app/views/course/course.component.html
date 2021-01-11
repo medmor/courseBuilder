@@ -1,0 +1,8 @@
+<div *ngIf="course">
+  <course_node [node]="course"></course_node>
+  <button (click)="saveCourse()">save</button>
+</div>
+<div *ngIf="!course">
+  <button (click)="createNewCourse()">new course</button>
+</div>
+<button (click)="openCourse()">open course</button>

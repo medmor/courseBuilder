@@ -1,0 +1,36 @@
+<div style="border:1px solid black;margin:10px 0 0 10px;padding:20px 0 0 10px;position:relative;min-height: 20px;">
+
+  <div style="position:absolute;top:0;right:0;">
+    <button (click)="downNode(node.index)">&#8595;</button>
+    <button (click)="upNode(node.index)">&#8593;</button>
+    <button *ngIf="node.content||node.children.length"
+      (click)="hideContent=!hideContent">{{hideContent?"+":"-"}}</button>
+    <button (click)="removeNode(node.index)">x</button>
+  </div>
+
+  <div style="position:absolute;top:0;left:0;">
+    <select [(ngModel)]="node.type">
+      <option *ngFor="let type of nodeTypes">
+        {{type}}
+      </option>
+    </select>
+    <button *ngIf="!node.title" (click)="addingTitle=true;">title</button>
+    <button (click)="addChildNode()">childe</button>
+    <button *ngIf="!node.content" (click)="addingContent=true;hideContent=false;">content</button>
+  </div>
+
+  <editable_area *ngIf="addingTitle||node.title" [text]="node.title" (textEvent)="node.title=$event" [label]="'Title'">
+  </editable_area>
+
+  <ng-container *ngIf="!hideContent">
+    <editable_area *ngIf="addingContent||node.content" (textEvent)="node.content=$event" [text]="node.content"
+      [label]="'Content'"></editable_area>
+    <div *ngIf="node.children.length>0">
+      <div *ngFor="let thisNode of node.children">
+        <course_node [node]="thisNode"></course_node>
+      </div>
+    </div>
+  </ng-container>
+
+
+</div>
