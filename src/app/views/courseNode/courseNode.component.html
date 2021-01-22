@@ -32,5 +32,8 @@
     </div>
   </ng-container>
 
+  <ng-container *ngIf="node.type=='Figure'">
+    <img [src]="figure" [alt]="figure">
+  </ng-container>
 
 </div>

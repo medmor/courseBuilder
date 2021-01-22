@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
+
 import { CourseNodeModel, courseNodeTypes } from '../../model/courseNode.model';
+import { ElectronService } from '../../services/electron.service';
 
 
 @Component({
@@ -12,7 +14,11 @@ export class CourseNodeComponent {
   addingTitle = false;
   addingContent = false;
   hideContent = true;
+  figure = '';
   @Input() node: CourseNodeModel;
+
+  constructor(private electronService: ElectronService, private zone: NgZone) { }
+
 
 
   addChildNode() {
